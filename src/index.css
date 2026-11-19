@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-powder-pink: #F7D6D0;
+  --color-powder-pink-light: #FDF4F2;
+  --color-coral-haze: #E27D60;
+  --color-coral-haze-dark: #C45F42;
+  --color-garden-green: #2D5A3E;
+  --color-garden-green-light: #4E7A5E;
+  --color-garden-green-pale: #E8EFEA;
+  --color-taupe: #8B7355;
+  --color-taupe-light: #C7B5A3;
+  --color-taupe-pale: #F4EFEB;
+  --color-oxblood: #5C131F;
+  --color-oxblood-dark: #3F0A13;
+  --color-gold: #D4AF37;
+  --color-gold-light: #F5E5B8;
+  --color-gold-dark: #9E7416;
+  --color-text-main: #241A18;
+  --color-text-muted: #6B554E;
+  
+  /* Radiant Metallic Gold Border Gradient */
+  --gold-metallic-border: linear-gradient(
+    135deg,
+    #F9E7B9 0%,
+    #D4AF37 25%,
+    #AA7C11 50%,
+    #F5D77F 75%,
+    #8B6812 100%
+  );
+  --gold-metallic-border-hover: linear-gradient(
+    135deg,
+    #FFF4D0 0%,
+    #E5C07B 25%,
+    #D4AF37 50%,
+    #C49B30 75%,
+    #AA7C11 100%
+  );
+  --gold-glow: 0 0 20px rgba(212, 175, 55, 0.35), 0 10px 30px -10px rgba(139, 115, 85, 0.2);
+  --card-surface: linear-gradient(145deg, rgba(255, 255, 255, 0.96) 0%, rgba(254, 250, 246, 0.92) 100%);
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: #FDF7F4;
+  color: var(--color-text-main);
+  min-height: 100%;
+}
+
+/* Radiant Metallic Golden Border Card for ALL Cards */
+.vibrant-ombre-card,
+.golden-border-card {
+  position: relative;
+  border-radius: 1.5rem;
+  background: var(--card-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 12px 30px -10px rgba(139, 115, 85, 0.16), 0 4px 12px -2px rgba(212, 175, 55, 0.15);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.vibrant-ombre-card::before,
+.golden-border-card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  padding: 2px;
+  background: var(--gold-metallic-border);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.92;
+  transition: opacity 0.4s ease, filter 0.4s ease;
+}
+
+.vibrant-ombre-card:hover,
+.golden-border-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 45px -10px rgba(212, 175, 55, 0.35), 0 8px 20px -4px rgba(92, 19, 31, 0.15);
+}
+
+.vibrant-ombre-card:hover::before,
+.golden-border-card:hover::before {
+  opacity: 1;
+  background: var(--gold-metallic-border-hover);
+  filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.55));
+}
+
+/* Golden Ombre Flourish Divider */
+.divider-flourish {
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #F5D77F 20%,
+    #D4AF37 50%,
+    #AA7C11 80%,
+    transparent
+  );
+  border-radius: 9999px;
+}
+
+/* Realistic Calligraphy Ink Styling */
+.calligraphy-ink-text {
+  font-family: 'Pinyon Script', 'Alex Brush', cursive;
+  color: var(--color-oxblood);
+  text-shadow: 0 1px 2px rgba(63, 10, 19, 0.35), 0 0 1px rgba(92, 19, 31, 0.5);
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: #F4EFEB;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #F5D77F, #D4AF37, #8B6812);
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #5C131F;
+}
