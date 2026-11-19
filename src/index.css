@@ -128,3 +128,12 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: #5C131F;
 }
+
+/* Hide scrollbar for clean horizontal tab scrolling */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

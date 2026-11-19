@@ -58,40 +58,41 @@ export default function AdminPanel() {
   const familyAlbum = data.familyAlbum || data.gallery?.familyAlbum || {};
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md">
-      <div className="relative w-full max-w-6xl bg-white rounded-3xl shadow-2xl overflow-hidden border border-neutral-200 h-[92vh] flex flex-col">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-0 sm:p-4 md:p-6 bg-black/85 backdrop-blur-md">
+      <div className="relative w-full max-w-6xl bg-white sm:rounded-3xl rounded-none shadow-2xl overflow-hidden border-0 sm:border border-neutral-200 h-[100dvh] sm:h-[92vh] flex flex-col">
         
         {/* Top Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-100 bg-neutral-50/90">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-r from-palette-coral-haze to-palette-oxblood text-white flex items-center justify-center shadow-md">
-              <Sparkles className="w-5 h-5" />
+        <div className="flex items-center justify-between px-4 py-3 sm:px-6 sm:py-4 border-b border-neutral-200/80 bg-neutral-50/90 gap-2 flex-shrink-0">
+          <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-gradient-to-r from-palette-coral-haze to-palette-oxblood text-white flex items-center justify-center shadow-md flex-shrink-0">
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h2 className="font-serif text-xl font-bold text-neutral-900">
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <h2 className="font-serif text-base sm:text-xl font-bold text-neutral-900 truncate">
                   Wedding Studio Customizer
                 </h2>
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
                   Live Preview
                 </span>
               </div>
-              <p className="text-xs text-neutral-500">
+              <p className="text-[11px] sm:text-xs text-neutral-500 truncate hidden sm:block">
                 Customize colors, ombre effects, calligraphy names, venues, and private passcode
               </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
             {saveToast && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold border border-emerald-200">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-                {saveToast}
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-[11px] sm:text-xs font-semibold border border-emerald-200">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 flex-shrink-0" />
+                <span className="hidden sm:inline">{saveToast}</span>
+                <span className="sm:hidden">Saved</span>
               </span>
             )}
             <button
               onClick={() => setIsAdminOpen(false)}
-              className="p-2 rounded-xl text-neutral-400 hover:text-neutral-700 hover:bg-neutral-200 transition-colors"
+              className="p-2 sm:p-2.5 rounded-xl text-neutral-500 hover:text-neutral-800 hover:bg-neutral-200 active:scale-95 transition-all"
               title="Close Admin Panel"
             >
               <X className="w-5 h-5" />
@@ -99,18 +100,19 @@ export default function AdminPanel() {
           </div>
         </div>
 
-        {/* Main Body with Sidebar Tabs */}
-        <div className="flex flex-1 overflow-hidden">
-          {/* Navigation Sidebar */}
-          <div className="w-64 border-r border-neutral-100 bg-neutral-50/60 p-4 space-y-1.5 overflow-y-auto">
+        {/* Main Body with Sidebar Tabs: Horizontal scrolling pills on mobile, Vertical sidebar on desktop */}
+        <div className="flex flex-col md:flex-row flex-1 overflow-hidden min-h-0">
+          
+          {/* Navigation Tabs */}
+          <div className="w-full md:w-64 border-b md:border-b-0 md:border-r border-neutral-200/80 bg-neutral-50/90 p-2 sm:p-3 md:p-4 flex md:flex-col gap-1.5 overflow-x-auto md:overflow-y-auto flex-shrink-0 scrollbar-none">
             {[
-              { id: 'themes', label: 'Theme & Palettes', icon: Palette, desc: 'Coral, Green, Taupe, Ombre' },
-              { id: 'hero', label: 'Names & Calligraphy', icon: Type, desc: 'Bride & Groom names' },
-              { id: 'events', label: 'Pre-Wedding Events', icon: Calendar, desc: 'Haldi, Mehndi, Sangeet' },
-              { id: 'venue', label: 'Venues & Reception', icon: MapPin, desc: 'Locations & Timings' },
-              { id: 'family', label: 'Family Passcode', icon: Lock, desc: 'Secret PIN & Family photos' },
-              { id: 'vendors', label: 'Wedding Artisans', icon: Users, desc: 'Planners, caterers, florists' },
-              { id: 'settings', label: 'Backup & Reset', icon: Save, desc: 'Export / Import JSON' },
+              { id: 'themes', label: 'Theme & Palettes', short: 'Themes', icon: Palette, desc: 'Coral, Green, Taupe, Ombre' },
+              { id: 'hero', label: 'Names & Calligraphy', short: 'Names', icon: Type, desc: 'Bride & Groom names' },
+              { id: 'events', label: 'Pre-Wedding Events', short: 'Events', icon: Calendar, desc: 'Haldi, Mehndi, Sangeet' },
+              { id: 'venue', label: 'Venues & Reception', short: 'Venues', icon: MapPin, desc: 'Locations & Timings' },
+              { id: 'family', label: 'Family Passcode', short: 'Family', icon: Lock, desc: 'Secret PIN & Family photos' },
+              { id: 'vendors', label: 'Wedding Artisans', short: 'Artisans', icon: Users, desc: 'Planners, caterers, florists' },
+              { id: 'settings', label: 'Backup & Reset', short: 'Backup', icon: Save, desc: 'Export / Import JSON' },
             ].map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
@@ -118,16 +120,19 @@ export default function AdminPanel() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`w-full flex items-start gap-3 p-3 rounded-2xl text-left transition-all ${
+                  className={`flex items-center md:items-start gap-2 md:gap-3 px-3 py-2 md:p-3 rounded-xl md:rounded-2xl text-left transition-all whitespace-nowrap md:whitespace-normal flex-shrink-0 ${
                     isActive
-                      ? 'bg-gradient-to-r from-palette-coral-haze to-palette-oxblood text-white shadow-md'
-                      : 'hover:bg-neutral-100 text-neutral-700'
+                      ? 'bg-gradient-to-r from-palette-coral-haze via-palette-oxblood to-palette-coral-haze text-white shadow-sm'
+                      : 'hover:bg-neutral-200/60 bg-white md:bg-transparent text-neutral-700 border border-neutral-200/60 md:border-transparent'
                   }`}
                 >
-                  <Icon className={`w-5 h-5 flex-shrink-0 mt-0.5 ${isActive ? 'text-white' : 'text-neutral-500'}`} />
+                  <Icon className={`w-4 h-4 md:w-5 md:h-5 flex-shrink-0 ${isActive ? 'text-white' : 'text-palette-coral-haze md:text-neutral-500'}`} />
                   <div>
-                    <span className="block text-sm font-semibold leading-tight">{tab.label}</span>
-                    <span className={`text-[11px] block mt-0.5 ${isActive ? 'text-white/80' : 'text-neutral-400'}`}>
+                    <span className="block text-xs md:text-sm font-semibold leading-tight">
+                      <span className="md:hidden">{tab.short}</span>
+                      <span className="hidden md:inline">{tab.label}</span>
+                    </span>
+                    <span className={`text-[11px] hidden md:block mt-0.5 ${isActive ? 'text-white/80' : 'text-neutral-400'}`}>
                       {tab.desc}
                     </span>
                   </div>
@@ -137,7 +142,7 @@ export default function AdminPanel() {
           </div>
 
           {/* Tab Content Area */}
-          <div className="flex-1 overflow-y-auto p-6 sm:p-8 bg-white">
+          <div className="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 bg-white min-h-0">
             
             {/* 1. THEMES & COLOR PALETTES */}
             {activeTab === 'themes' && (
@@ -317,11 +322,11 @@ export default function AdminPanel() {
                 </div>
 
                 {/* Calligraphy Preview and Replay */}
-                <div className="p-6 rounded-2xl border border-neutral-200 bg-palette-powder-pink/20 text-center space-y-3">
+                <div className="p-4 sm:p-6 rounded-2xl border border-neutral-200 bg-palette-powder-pink/20 text-center space-y-3">
                   <p className="text-xs uppercase tracking-widest text-palette-oxblood font-bold">
                     Live Calligraphy Handwriting Test
                   </p>
-                  <div className="font-calligraphy text-5xl sm:text-6xl text-palette-oxblood py-2">
+                  <div className="font-calligraphy text-3xl sm:text-4xl md:text-5xl text-palette-oxblood py-2 break-words">
                     {data.hero.groomName} & {data.hero.brideName}
                   </div>
                   <button
@@ -329,7 +334,7 @@ export default function AdminPanel() {
                       replayCalligraphy();
                       triggerToast('Replaying calligraphy animation on hero!');
                     }}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-palette-coral-haze to-palette-oxblood text-white text-xs font-serif uppercase tracking-wider font-bold shadow-md hover:scale-105 transition-all"
+                    className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-5 py-2.5 rounded-full bg-gradient-to-r from-palette-coral-haze to-palette-oxblood text-white text-xs font-serif uppercase tracking-wider font-bold shadow-md hover:scale-105 transition-all"
                   >
                     <RotateCcw className="w-3.5 h-3.5" />
                     <span>Test Handwriting Animation</span>
@@ -341,12 +346,12 @@ export default function AdminPanel() {
             {/* 3. PRE-WEDDING EVENTS */}
             {activeTab === 'events' && (
               <div className="space-y-6 max-w-4xl">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
-                    <h3 className="text-xl font-bold text-neutral-900 mb-1">
+                    <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-0.5 sm:mb-1">
                       Pre-Wedding Functions & Rituals
                     </h3>
-                    <p className="text-sm text-neutral-500">
+                    <p className="text-xs sm:text-sm text-neutral-500">
                       Haldi, Mehndi, Sangeet, or any custom cultural celebrations.
                     </p>
                   </div>
@@ -363,12 +368,12 @@ export default function AdminPanel() {
                         arrangedBy: "Joint Celebration",
                         venueName: "The Lakeside Deck",
                         description: "An intimate sundowner to welcome out-of-town guests with artisanal hors d'oeuvres and acoustic melodies.",
-                        image: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop",
+                        image: "/images/prewedding-haldi.jpg",
                         badge: "Welcome Soirée"
                       });
                       triggerToast('Added new event card!');
                     }}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-palette-coral-haze text-white text-xs font-bold hover:bg-palette-coral-haze-dark transition-all shadow-sm"
+                    className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-palette-coral-haze text-white text-xs font-bold hover:bg-palette-coral-haze-dark transition-all shadow-sm w-full sm:w-auto"
                   >
                     <Plus className="w-4 h-4" />
                     <span>Add New Event</span>
@@ -757,8 +762,8 @@ export default function AdminPanel() {
 
                 {/* Private Family Photos Manager */}
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <h4 className="font-bold text-sm text-neutral-800 uppercase tracking-wider">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <h4 className="font-bold text-xs sm:text-sm text-neutral-800 uppercase tracking-wider">
                       Family Album Photos ({familyAlbum.privatePhotos?.length || 0})
                     </h4>
                     <button
@@ -770,7 +775,7 @@ export default function AdminPanel() {
                         });
                         triggerToast('Added photo to private family album');
                       }}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-palette-coral-haze to-palette-oxblood text-white text-xs font-bold"
+                      className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-palette-coral-haze to-palette-oxblood text-white text-xs font-bold w-full sm:w-auto shadow-sm"
                     >
                       <Plus className="w-3.5 h-3.5" />
                       <span>Add Family Photo</span>
@@ -804,12 +809,12 @@ export default function AdminPanel() {
             {/* 6. VENDORS & DREAM TEAM */}
             {activeTab === 'vendors' && (
               <div className="space-y-6 max-w-4xl">
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
-                    <h3 className="text-xl font-bold text-neutral-900 mb-1">
+                    <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-0.5 sm:mb-1">
                       Event Managers, Caterers & Artisans
                     </h3>
-                    <p className="text-sm text-neutral-500">
+                    <p className="text-xs sm:text-sm text-neutral-500">
                       Showcase the creators and companies behind your wedding production.
                     </p>
                   </div>
@@ -825,7 +830,7 @@ export default function AdminPanel() {
                       });
                       triggerToast('Added new vendor');
                     }}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-palette-coral-haze text-white text-xs font-bold hover:bg-palette-coral-haze-dark transition-all shadow-sm"
+                    className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-palette-coral-haze text-white text-xs font-bold hover:bg-palette-coral-haze-dark transition-all shadow-sm w-full sm:w-auto"
                   >
                     <Plus className="w-4 h-4" />
                     <span>Add Artisan</span>
@@ -910,7 +915,7 @@ export default function AdminPanel() {
                   </p>
                 </div>
 
-                <div className="p-6 rounded-2xl border border-neutral-200 bg-neutral-50 flex items-center justify-between">
+                <div className="p-4 sm:p-6 rounded-2xl border border-neutral-200 bg-neutral-50 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
                     <h4 className="font-bold text-neutral-900 text-sm">Download Configuration (JSON)</h4>
                     <p className="text-xs text-neutral-500">
@@ -922,14 +927,14 @@ export default function AdminPanel() {
                       exportConfig();
                       triggerToast('Configuration downloaded!');
                     }}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-palette-oxblood text-white text-xs font-semibold hover:bg-palette-oxblood-dark transition-all shadow-sm"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-palette-oxblood text-white text-xs font-semibold hover:bg-palette-oxblood-dark transition-all shadow-sm w-full sm:w-auto"
                   >
                     <Download className="w-4 h-4" />
                     <span>Export JSON</span>
                   </button>
                 </div>
 
-                <div className="p-6 rounded-2xl border border-neutral-200 bg-neutral-50 space-y-3">
+                <div className="p-4 sm:p-6 rounded-2xl border border-neutral-200 bg-neutral-50 space-y-3">
                   <h4 className="font-bold text-neutral-900 text-sm">Import Configuration</h4>
                   <textarea
                     rows={4}
@@ -952,14 +957,14 @@ export default function AdminPanel() {
                         setImportError(res.error || 'Failed to import JSON');
                       }
                     }}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-neutral-900 text-white text-xs font-semibold hover:bg-black transition-all"
+                    className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-neutral-900 text-white text-xs font-semibold hover:bg-black transition-all"
                   >
                     <Upload className="w-4 h-4" />
                     <span>Apply Imported Configuration</span>
                   </button>
                 </div>
 
-                <div className="p-6 rounded-2xl border border-red-200 bg-red-50/50 flex items-center justify-between">
+                <div className="p-4 sm:p-6 rounded-2xl border border-red-200 bg-red-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                   <div>
                     <h4 className="font-bold text-red-900 text-sm">Reset to Default Template</h4>
                     <p className="text-xs text-red-700">
@@ -973,7 +978,7 @@ export default function AdminPanel() {
                         triggerToast('Reset to default template!');
                       }
                     }}
-                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-red-300 bg-white hover:bg-red-100 text-red-700 text-xs font-semibold transition-all"
+                    className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-red-300 bg-white hover:bg-red-100 text-red-700 text-xs font-semibold transition-all w-full sm:w-auto"
                   >
                     <RotateCcw className="w-4 h-4" />
                     <span>Reset Defaults</span>
@@ -986,13 +991,13 @@ export default function AdminPanel() {
         </div>
 
         {/* Bottom Drawer Footer */}
-        <div className="px-6 py-3.5 border-t border-neutral-100 bg-neutral-50 flex items-center justify-between">
-          <span className="text-xs text-neutral-500 font-sans">
-            Antigravity Wedding Portfolio Studio • All edits are preserved locally
+        <div className="px-4 py-3 sm:px-6 sm:py-3.5 border-t border-neutral-200/80 bg-neutral-50 flex flex-col sm:flex-row items-center justify-between gap-2.5 flex-shrink-0">
+          <span className="text-[11px] sm:text-xs text-neutral-500 font-sans text-center sm:text-left">
+            Antigravity Wedding Portfolio Studio • All edits are preserved locally in real-time
           </span>
           <button
             onClick={() => setIsAdminOpen(false)}
-            className="px-6 py-2.5 rounded-full bg-gradient-to-r from-palette-coral-haze to-palette-oxblood text-white font-serif text-xs uppercase tracking-wider font-bold shadow-md hover:scale-105 transition-all"
+            className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-gradient-to-r from-palette-coral-haze to-palette-oxblood text-white font-serif text-xs uppercase tracking-wider font-bold shadow-md hover:scale-105 active:scale-95 transition-all text-center"
           >
             Done & View Live Site
           </button>
