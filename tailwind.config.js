@@ -44,8 +44,20 @@ export default {
         'pulse-glow': 'pulseGlow 3s ease-in-out infinite',
         'shimmer-fast': 'shimmer 3s linear infinite',
         'spin-very-slow': 'spin 30s linear infinite',
+        'shake': 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both',
+        'fade-in': 'fadeIn 0.3s ease-out forwards',
       },
       keyframes: {
+        shake: {
+          '10%, 90%': { transform: 'translate3d(-1px, 0, 0)' },
+          '20%, 80%': { transform: 'translate3d(2px, 0, 0)' },
+          '30%, 50%, 70%': { transform: 'translate3d(-4px, 0, 0)' },
+          '40%, 60%': { transform: 'translate3d(4px, 0, 0)' },
+        },
+        fadeIn: {
+          '0%': { opacity: '0', transform: 'translateY(-4px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
         float: {
           '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
           '50%': { transform: 'translateY(-14px) rotate(4deg)' },

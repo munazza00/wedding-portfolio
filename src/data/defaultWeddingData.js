@@ -79,6 +79,7 @@ export const THEME_PRESETS = {
 
 export const defaultWeddingData = {
   theme: THEME_PRESETS.vibrantOmbre,
+  backofficePassword: "19112026",
   hero: {
     groomName: "Aarav",
     brideName: "Meera",

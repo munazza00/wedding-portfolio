@@ -121,14 +121,14 @@ export default function Navbar() {
             )}
           </button>
 
-          {/* Admin Studio Button */}
+          {/* Backoffice Button */}
           <button
             onClick={() => setIsAdminOpen(true)}
             className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-palette-coral-haze to-palette-oxblood text-white font-serif text-xs uppercase tracking-wider font-bold transition-all duration-300 shadow-sm hover:shadow-coral-glow hover:scale-105"
-            title="Open Customizable Admin Studio"
+            title="Open Palace Backoffice (/backoffice)"
           >
             <Sliders className="w-3.5 h-3.5 text-palette-powder-pink" />
-            <span className="hidden sm:inline">Admin Studio</span>
+            <span className="hidden sm:inline">Backoffice</span>
           </button>
 
           {/* Mobile Menu Hamburger */}
@@ -163,7 +163,7 @@ export default function Navbar() {
               className="w-full flex items-center justify-center gap-2 py-3 rounded-2xl bg-gradient-to-r from-palette-coral-haze to-palette-oxblood text-white font-serif text-xs uppercase tracking-wider font-bold shadow-md"
             >
               <Sliders className="w-4 h-4" />
-              <span>Open Admin Studio</span>
+              <span>Palace Backoffice (/backoffice)</span>
             </button>
           </div>
         </div>
