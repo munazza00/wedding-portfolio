@@ -72,58 +72,7 @@ export function WeddingProvider({ children }) {
     });
   }, []);
 
-  // Endpoint Route State (/backoffice or /)
-  const getInitialRoute = () => {
-    if (typeof window === 'undefined') return '/';
-    const path = window.location.pathname.toLowerCase();
-    const hash = window.location.hash.toLowerCase();
-    if (path.includes('backoffice') || hash.includes('backoffice')) {
-      return '/backoffice';
-    }
-    return '/';
-  };
-
-  const [currentRoute, setCurrentRoute] = useState(getInitialRoute);
-
-  const navigate = (to) => {
-    const targetRoute = to.toLowerCase().includes('backoffice') ? '/backoffice' : '/';
-    if (typeof window !== 'undefined') {
-      if (window.location.pathname !== targetRoute) {
-        window.history.pushState({}, '', targetRoute);
-      }
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    setCurrentRoute(targetRoute);
-  };
-
-  useEffect(() => {
-    const handleLocationChange = () => {
-      const path = window.location.pathname.toLowerCase();
-      const hash = window.location.hash.toLowerCase();
-      if (path.includes('backoffice') || hash.includes('backoffice')) {
-        setCurrentRoute('/backoffice');
-      } else {
-        setCurrentRoute('/');
-      }
-    };
-
-    window.addEventListener('popstate', handleLocationChange);
-    window.addEventListener('hashchange', handleLocationChange);
-    return () => {
-      window.removeEventListener('popstate', handleLocationChange);
-      window.removeEventListener('hashchange', handleLocationChange);
-    };
-  }, []);
-
-  const isAdminOpen = currentRoute === '/backoffice';
-  const setIsAdminOpen = (isOpen) => {
-    if (isOpen) {
-      navigate('/backoffice');
-    } else {
-      navigate('/');
-    }
-  };
-
+  const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [isFamilyModalOpen, setIsFamilyModalOpen] = useState(false);
   const [isFamilyUnlocked, setIsFamilyUnlocked] = useState(false);
   const [calligraphyKey, setCalligraphyKey] = useState(1);
@@ -317,13 +266,6 @@ export function WeddingProvider({ children }) {
     }
   };
 
-  const updateBackofficePassword = (newPassword) => {
-    setData(prev => ({
-      ...prev,
-      backofficePassword: newPassword
-    }));
-  };
-
   const resetToDefault = () => {
     setData(defaultWeddingData);
     localStorage.removeItem(STORAGE_KEY);
@@ -332,8 +274,6 @@ export function WeddingProvider({ children }) {
   return (
     <WeddingContext.Provider value={{
       data,
-      currentRoute,
-      navigate,
       isAdminOpen,
       setIsAdminOpen,
       isFamilyModalOpen,
@@ -359,7 +299,6 @@ export function WeddingProvider({ children }) {
       exportConfig,
       importConfig,
       resetToDefault,
-      updateBackofficePassword,
     }}>
       {children}
     </WeddingContext.Provider>

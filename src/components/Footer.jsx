@@ -35,7 +35,7 @@ export default function Footer() {
             className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-white border border-palette-coral-haze/40 text-palette-oxblood hover:text-palette-coral-haze font-serif text-xs uppercase tracking-wider font-semibold transition-all shadow-xs hover:shadow"
           >
             <Sliders className="w-3.5 h-3.5 text-palette-coral-haze" />
-            <span>Palace Backoffice (/backoffice)</span>
+            <span>Customize Website (Admin Studio)</span>
           </button>
         </div>
       </div>
